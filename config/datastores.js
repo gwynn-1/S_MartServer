@@ -51,11 +51,11 @@ module.exports.datastores = {
     // adapter: 'sails-mysql',
     // url: 'mysql://user:password@host:port/database',
     adapter:'sails-mysql',
-    host:'remotemysql.com',
-    port:3306,
-    user:'ZZlt42k3Yg',
-    password:'0udJkHa1gC',
-    database:'ZZlt42k3Yg'
+    host:'db4free.net',
+    port:3307,
+    user:'admin_huy',
+    password:'supernhok13',
+    database:'s_mart'
   },
 
   // default:{
