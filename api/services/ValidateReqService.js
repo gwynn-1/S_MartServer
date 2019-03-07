@@ -58,7 +58,8 @@ module.exports = {
         return req.validate([   // 'numeric || string' or 'numeric|| string' are OK. Space will be ignored
             { "Name": "string" },
             { "Email": "email" },
-            { "Phone": "numeric" }
+            { "Phone": "numeric" },
+            'Address?','CityId?','DistrictId?','WardId?','gender?'
         ]);
     },
 };
