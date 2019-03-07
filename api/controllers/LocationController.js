@@ -10,10 +10,14 @@ module.exports = {
     var district = req.param('districtid');
     if(district !=undefined){
         var result = await Ward.getWards(district);
-        console.log(district)
+        var resp =[];
+
+        for(var index in result){
+            resp.push({key:result[index].wardid, label:result[index].name})
+        }
         return res.status(200).json({
             "status":"success",
-            "data":result
+            "data":resp
         });
     }else{
         return res.status(200).json({
@@ -26,10 +30,14 @@ module.exports = {
     var province = req.param('provinceid');
     if(province !=undefined){
         var result = await District.getDistricts(province);
-        console.log(province)
+        var resp =[];
+
+        for(var index in result){
+            resp.push({key:result[index].districtid, label:result[index].name})
+        }
         return res.status(200).json({
             "status":"success",
-            "data":result
+            "data":resp
         });
     }else{
         return res.status(200).json({
@@ -40,9 +48,15 @@ module.exports = {
   },
   _getProvince:async function(req,res){
     var result = await Province.getProvince();
+    var resp =[];
+
+    for(var index in result){
+        resp.push({key:result[index].provinceid, label:result[index].name})
+    }
+
     return res.status(200).json({
         "status":"success",
-        "data":result
+        "data":resp
     });
   }
 };
