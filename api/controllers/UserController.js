@@ -67,7 +67,10 @@ module.exports = {
             try {
                 await Users.updateUser(userid, data);
                 return res.status(200).json({
-                    status: "success"
+                    status: "success",
+                    data:{
+                        image_path:data.Avatar
+                    }
                 });
             } catch (err) {
                 console.log(err);
