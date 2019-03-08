@@ -85,6 +85,7 @@ module.exports = {
                 return {
                     user_name:oUser.user_name,
                     Name:oUser.Name,
+                    Avatar:oUser.Avatar,
                     user_id:oUser.user_id
                 };
             }
