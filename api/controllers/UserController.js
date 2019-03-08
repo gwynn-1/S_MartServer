@@ -62,7 +62,7 @@ module.exports = {
             var baseUrl = sails.config.custom.baseUrl;
 
             var data = {
-                Avatar : require('util').format('%s/user/avatar/%s', baseUrl, userid),
+                Avatar : "/images/"+ uploadedFiles[0].fd.substring(uploadedFiles[0].fd.lastIndexOf('/')+1),
             }
 
             try {
@@ -70,7 +70,7 @@ module.exports = {
                 return res.status(200).json({
                     status: "success",
                     data:{
-                        image_path:data.Avatar
+                        image_path:baseUrl + data.Avatar
                     }
                 });
             } catch (err) {
