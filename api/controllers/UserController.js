@@ -59,8 +59,6 @@ module.exports = {
             }
             console.log(uploadedFiles);
 
-            var baseUrl = sails.config.custom.baseUrl;
-
             var data = {
                 Avatar : "/upload/user/avatar/"+ uploadedFiles[0].fd.substring(uploadedFiles[0].fd.lastIndexOf('/')+1),
             }
@@ -70,7 +68,7 @@ module.exports = {
                 return res.status(200).json({
                     status: "success",
                     data:{
-                        image_path:baseUrl + data.Avatar
+                        image_path: data.Avatar
                     }
                 });
             } catch (err) {
