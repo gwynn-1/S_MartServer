@@ -55,6 +55,7 @@ module.exports = {
             'data':{
                 'jwt_string':jwt,
                 'username':oResult.user_name,
+                'avatar':oResult.Avatar,
                 'name':oResult.Name
             }
         });
@@ -77,6 +78,7 @@ module.exports = {
                 'data':{
                     'jwt_string':jwt,
                     'username':loginstatus.user_name,
+                    'avatar':loginstatus.Avatar,
                     'name':loginstatus.Name
                 }
             });

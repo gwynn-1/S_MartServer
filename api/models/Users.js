@@ -78,7 +78,7 @@ module.exports = {
 
     checkIfLoginByUsername:async function(username){
         var oUser = await Users.findOne({
-            select: ['isLogin','active','user_name',"Name","user_id"],
+            select: ['isLogin','active','user_name',"Avatar","Name","user_id"],
           }).where({'user_name': username});
         if(oUser){
             if(Object.getOwnPropertyNames(oUser).length !=0 && oUser.active ==1 && oUser.isLogin==1){
