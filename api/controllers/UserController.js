@@ -49,7 +49,7 @@ module.exports = {
         req.file('avatar').upload({
             // don't allow the total upload size to exceed ~10MB
             maxBytes: 10000000,
-            dirname: require('path').resolve(sails.config.appPath, 'assets/images')
+            dirname: require('path').resolve(sails.config.appPath, '.tmp/public/upload/user/avatar')
         },async function whenDone(err, uploadedFiles) {
             if (err) {
                 return res.serverError(err);
@@ -62,7 +62,7 @@ module.exports = {
             var baseUrl = sails.config.custom.baseUrl;
 
             var data = {
-                Avatar : "/images/"+ uploadedFiles[0].fd.substring(uploadedFiles[0].fd.lastIndexOf('/')+1),
+                Avatar : "/upload/user/avatar/"+ uploadedFiles[0].fd.substring(uploadedFiles[0].fd.lastIndexOf('/')+1),
             }
 
             try {
