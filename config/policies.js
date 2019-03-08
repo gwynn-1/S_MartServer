@@ -27,5 +27,6 @@ module.exports.policies = {
   UserController:{
     'getUserInfo':'JwtCheck',
     'updateUser':'JwtCheck',
+    'updateAvatar':'JwtCheck'
   }
 };

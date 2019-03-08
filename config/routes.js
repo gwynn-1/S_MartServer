@@ -53,6 +53,7 @@ module.exports.routes = {
 
   'GET /api/user/get':'UserController.getUserInfo',
   'POST /api/user/update':'UserController.updateUser',
+  'POST /api/user/update-avatar':'UserController.updateAvatar',
 
   'GET /api/location/get-ward':'LocationController._getWard',
   'GET /api/location/get-district':'LocationController._getDistrict',

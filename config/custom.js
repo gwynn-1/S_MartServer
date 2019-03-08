@@ -22,5 +22,6 @@ module.exports.custom = {
   indexOfUser:0,
 
   VALIDATE_PASSWORD:"VALIDATE_PASSWORD",
-  REQUIRED_FIELD:"REQUIRED_FIELD"
+  REQUIRED_FIELD:"REQUIRED_FIELD",
+  baseUrl:"http://139.59.237.230:8000"
 };

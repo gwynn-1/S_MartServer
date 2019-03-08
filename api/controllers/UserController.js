@@ -41,6 +41,38 @@ module.exports = {
                 message: (err.code == "E_UNIQUE") ? sails.config.error_code.LOGIN_USER_EXISTED : err.code
             });
         }
+    },
+
+    updateAvatar: async function (req, res) {
+        var userid = req.users.userid;
+
+        req.file('avatar').upload({
+            // don't allow the total upload size to exceed ~10MB
+            maxBytes: 10000000,
+            dirname: require('path').resolve(sails.config.appPath, 'assets/images')
+        },async function whenDone(err, uploadedFiles) {
+            if (err) {
+                return res.serverError(err);
+            }
+            if (uploadedFiles.length === 0) {
+                return res.badRequest('No file was uploaded');
+            }
+
+            var baseUrl = sails.config.custom.baseUrl;
+
+            var data = {
+                Avatar : require('util').format('%s/user/avatar/%s', baseUrl, userid),
+            }
+
+            try {
+                await Users.updateUser(userid, data);
+                return res.status(200).json({
+                    status: "success"
+                });
+            } catch (err) {
+                console.log(err);
+            }
+        });
     }
 };
 
