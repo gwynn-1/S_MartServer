@@ -57,6 +57,7 @@ module.exports = {
             if (uploadedFiles.length === 0) {
                 return res.badRequest('No file was uploaded');
             }
+            console.log(uploadedFiles);
 
             var baseUrl = sails.config.custom.baseUrl;
 
