@@ -12,6 +12,7 @@ module.exports = {
   attributes: {
     product_id:{ type:'number',unique:true,autoIncrement:true},
     product_name:{ type:'string',maxLength:256},
+    p_image:{type:'string',maxLength:512},
     p_type_id:{ type:'number'},
     price_origin:{ type:'number'},
     price:{ type:'number'},
