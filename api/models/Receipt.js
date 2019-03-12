@@ -15,7 +15,15 @@ module.exports = {
     receipt_code:{ type:'string',maxLength:20},
     total_price:{ type:'number'},
     total_payment:{ type:'number'},
-    status:{type:'string',enum: ['pending', 'success', 'failed']}
+    status:{type:'string',enum: ['pending', 'success', 'failed']},
+    created_at: {
+      columnName: 'created_at',
+      type: 'number', columnType: 'datetime', autoCreatedAt: true
+  },
+  updated_at: {
+      columnName: 'updated_at',
+      type: 'number', columnType: 'datetime', autoUpdatedAt: true
+  }
   },
 
   _getReceiptByUser:async function(userid,page=1){
