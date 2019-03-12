@@ -18,10 +18,14 @@ module.exports = {
     status:{type:'string',enum: ['pending', 'success', 'failed']}
   },
 
-  _getReceiptByUser:async function(userid){
+  _getReceiptByUser:async function(userid,page=1){
+      var limit =10;
       var res = await Receipt.find({
-        where: { user_id: userid }
-      })
+        where: { user_id: userid },
+         limit, skip: limit * (page-1)
+      });
+
+      
       return res;
   }
 

@@ -11,11 +11,17 @@ module.exports = {
         var userid = req.users.userid;
         var r_id = req.param('id');
         if (r_id == undefined) {
-            var receipt = await Receipt._getReceiptByUser(userid);
-            // console.log(receipt);
+            var page = req.param('page');
+            var receipt = await Receipt._getReceiptByUser(userid,page);
+            // console.log(page);
+            var total = await Receipt.count();
+            data = {
+                data : receipt,
+                page,total
+            };
             return res.status(200).json({
                 'status': "success",
-                'data': receipt
+                'data': data
             });
         } else {
             if (!isNaN(r_id)) {
