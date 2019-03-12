@@ -58,7 +58,7 @@ module.exports.routes = {
   'GET /api/location/get-ward':'LocationController._getWard',
   'GET /api/location/get-district':'LocationController._getDistrict',
   'GET /api/location/get-province':'LocationController._getProvince',
-
+  'GET /api/receipt/:id?':'ReceiptController._getReceipt',
   
   //use for embedded camera device
   'POST /api/qrcode/authen':'QrCodeController.authenQrCode'

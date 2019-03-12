@@ -28,5 +28,8 @@ module.exports.policies = {
     'getUserInfo':'JwtCheck',
     'updateUser':'JwtCheck',
     'updateAvatar':'JwtCheck'
+  },
+  ReceiptController:{
+    '_getReceipt':'JwtCheck'
   }
 };
