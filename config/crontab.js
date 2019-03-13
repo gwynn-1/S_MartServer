@@ -1,5 +1,5 @@
 module.exports.crontab = {
-    '*/1 * * * *' : function(){
+    '*/2 * * * *' : function(){
         require('../crontab/update-token.js').run();
     }
 };
