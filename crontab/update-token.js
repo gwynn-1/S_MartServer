@@ -1,5 +1,25 @@
+var admin = require("firebase-admin");
+
+var serviceAccount = require("../smartapp-45af7-firebase-adminsdk-lhg28-09cdb2e7fe.json");
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://smartapp-45af7.firebaseio.com"
+  });
+
+var payload = {
+    notification: {
+      title: "TEST",
+      body: "Load qr"
+    },
+    data: {
+      action: "LOAD_QR",
+    }
+  };
+
 module.exports = {
     run: async function(){
+        
         var total = await Users.count();
         var range = 500;
         var total_page = Math.floor( total /range);
@@ -20,6 +40,7 @@ module.exports = {
                         .set({shop_token:token});
             }
             console.log("success");
+            admin.messaging().send(payload);
           });
 
         if(cur_page == total_page){
