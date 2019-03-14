@@ -1,6 +1,7 @@
 var admin = require("firebase-admin");
 
 var serviceAccount = require("../smartapp-45af7-firebase-adminsdk-lhg28-09cdb2e7fe.json");
+
 const UPDATE_QR_TOPIC ="UPDATE_QR_TOPIC";
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -8,14 +9,9 @@ admin.initializeApp({
 });
 
 var payload = {
-    notification: {
-        title: "TEST",
-        body: "Load qr"
-    },
     data: {
         action: "LOAD_QR",
-    },
-    topic: UPDATE_QR_TOPIC
+    }
 };
 
 module.exports = {
@@ -41,7 +37,9 @@ module.exports = {
                         .set({ shop_token: token });
                 }
                 console.log("success");
-                admin.messaging().send(payload);
+                // admin.messaging().sendToTopic(UPDATE_QR_TOPIC,payload,{
+                //     priority:"high",timeToLive:60*60*12
+                // });
             });
 
         if (cur_page == total_page) {
