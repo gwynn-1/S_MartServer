@@ -1,50 +1,51 @@
 var admin = require("firebase-admin");
 
 var serviceAccount = require("../smartapp-45af7-firebase-adminsdk-lhg28-09cdb2e7fe.json");
-
+const UPDATE_QR_TOPIC ="UPDATE_QR_TOPIC";
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://smartapp-45af7.firebaseio.com"
-  });
+});
 
 var payload = {
     notification: {
-      title: "TEST",
-      body: "Load qr"
+        title: "TEST",
+        body: "Load qr"
     },
     data: {
-      action: "LOAD_QR",
-    }
-  };
+        action: "LOAD_QR",
+    },
+    topic: UPDATE_QR_TOPIC
+};
 
 module.exports = {
-    run: async function(){
-        
+    run: async function () {
+
         var total = await Users.count();
         var range = 500;
-        var total_page = Math.floor( total /range);
+        var total_page = Math.floor(total / range);
         var cur_page = sails.config.custom.indexOfUser;
 
         await Users.find({
-            select: ['user_name',"user_id"],
-          })
-          .paginate( cur_page, range)
-          .exec(async function(err,users){
-            if (err) {
-                return ;
-            }
-            
-            for(var i=0; i<users.length;i++){
-                var token = GeneralService.token_genarate(users[i].user_name);
-                await Users.update({user_id:users[i].user_id})
-                        .set({shop_token:token});
-            }
-            console.log("success");
-            admin.messaging().send(payload);
-          });
+            select: ['user_name', "user_id"],
+        })
+            .paginate(cur_page, range)
+            .exec(async function (err, users) {
+                if (err) {
+                    return;
+                }
 
-        if(cur_page == total_page){
-            sails.config.custom.indexOfUser =0;
+                for (var i = 0; i < users.length; i++) {
+                    var token = GeneralService.token_genarate(users[i].user_name);
+                    await Users.update({ user_id: users[i].user_id })
+                        .set({ shop_token: token });
+                }
+                console.log("success");
+                admin.messaging().send(payload);
+            });
+
+        if (cur_page == total_page) {
+            sails.config.custom.indexOfUser = 0;
         }
     }
 }
