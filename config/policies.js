@@ -31,5 +31,8 @@ module.exports.policies = {
   },
   ReceiptController:{
     '_getReceipt':'JwtCheck'
+  },
+  ProductController:{
+    'getAllProduct':'JwtCheck'
   }
 };
