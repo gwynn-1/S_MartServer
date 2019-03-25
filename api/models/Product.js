@@ -13,11 +13,14 @@ module.exports = {
     product_id:{ type:'number',unique:true,autoIncrement:true},
     product_name:{ type:'string',maxLength:256},
     p_image:{type:'string',maxLength:512},
-    p_type_id:{ type:'number'},
+    type_id:{ model: 'ProductType'},
     price_origin:{ type:'number'},
     price:{ type:'number'},
     p_quantity:{ type:'number'},
   },
-
+  _getAllByType:async function(){
+    var product = await Product.find().populate('type_id');
+    return product;
+  }
 };
 

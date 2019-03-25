@@ -55,6 +55,8 @@ module.exports.routes = {
   'POST /api/user/update':'UserController.updateUser',
   'POST /api/user/update-avatar':'UserController.updateAvatar',
 
+  'GET /api/product/get':'ProductController.getAllProduct',
+
   'GET /api/location/get-ward':'LocationController._getWard',
   'GET /api/location/get-district':'LocationController._getDistrict',
   'GET /api/location/get-province':'LocationController._getProvince',
