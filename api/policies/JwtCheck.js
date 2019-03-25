@@ -6,7 +6,12 @@ module.exports = async function (req, res, proceed) {
     // > For more about where `req.me` comes from, check out this app's
     // > custom hook (`api/hooks/custom/index.js`).
     var authorization = req.headers.authorization;
-    var authen_token = authorization.replace("Bearer ","");
+    if(authorization !=undefined){
+        var authen_token = authorization.replace("Bearer ","");
+    }else{
+        return res.forbidden();
+    }
+    
     var decoded = JwtService.jwtCheck(authen_token);
 
     if(decoded){
