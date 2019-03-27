@@ -7,9 +7,12 @@
 
 module.exports = {
     getAllProduct: async function (req, res) {
-        var oResult = await ProductType._getAllByType();
+        var s = req.param('s');
+
+        var oResult = await ProductType._getAllByType((s!=undefined) ? s : null);
         // console.log(oResult)
         // var arr = [];
+
 
 
         return res.status(200).json({

@@ -17,8 +17,17 @@ module.exports = {
       via: 'type_id'
     }
   },
-  _getAllByType:async function(){
-    var product = await ProductType.find().populate('product');
+  _getAllByType:async function(search=null){
+    if(search!=null){
+      var product = await ProductType.find().populate('product',{
+        where:{product_name:{
+          "contains":search
+        }}
+      });
+    }else{
+      var product = await ProductType.find().populate('product');
+    }
+    
     return product;
   }
 };
