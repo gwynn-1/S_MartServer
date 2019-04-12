@@ -1,6 +1,8 @@
 module.exports = {
     tableName: 'users',
     primaryKey: 'user_id',
+    dontUseObjectIds: true,
+
     attributes:{
         user_id:{ type:'number',unique:true,autoIncrement:true},
         user_name:{ type:"string",unique:true, required: true,maxLength:256 },
@@ -19,10 +21,10 @@ module.exports = {
         isShopping:{ type:"number" },
         isLogin:{ type:"number" },
         active:{ type:"number" },
-        // user_detail: {
-        //     collection: 'user_detail',
-        //     via: 'users'
-        //   }
+        user_detail: {
+            collection: 'UserDetail',
+            via: 'user_id',
+        }
     },
 
     getUserInfo:async function(userid) {
@@ -79,9 +81,11 @@ module.exports = {
     checkIfLoginByUsername:async function(username){
         var oUser = await Users.findOne({
             select: ['isLogin','active','user_name',"Avatar","Name","user_id"],
-          }).where({'user_name': username});
+            where:{'user_name': username}
+          }).populate("user_detail");
+        //   console.log(oUser,username);
         if(oUser){
-            if(Object.getOwnPropertyNames(oUser).length !=0 && oUser.active ==1 && oUser.isLogin==1){
+            if(Object.getOwnPropertyNames(oUser).length !=0 && oUser.active ==1 && oUser.user_detail[0].isLogin==1){
                 return {
                     user_name:oUser.user_name,
                     Name:oUser.Name,
@@ -89,7 +93,7 @@ module.exports = {
                     user_id:oUser.user_id
                 };
             }
-            else if(Object.getOwnPropertyNames(oUser).length !=0 && oUser.active ==1 && oUser.isLogin==0)
+            else if(Object.getOwnPropertyNames(oUser).length !=0 && oUser.active ==1 && oUser.user_detail[0].isLogin==0)
                 return false;
             else
                 return false;
@@ -100,13 +104,14 @@ module.exports = {
 
     checkIfLogin:async function(userid){
         var oUser = await Users.findOne({
-            select: ['isLogin','active'],
-          }).where({'user_id': userid});
+            select: ['active'],
+            where:{'user_id': userid}
+          }).populate("user_detail");
         
-        if(Object.getOwnPropertyNames(oUser).length !=0 && oUser.active ==1 && oUser.isLogin==1){
+        if(Object.getOwnPropertyNames(oUser).length !=0 && oUser.active ==1 && oUser.user_detail[0].isLogin==1){
             return true;
         }
-        else if(Object.getOwnPropertyNames(oUser).length !=0 && oUser.active ==1 && oUser.isLogin==0)
+        else if(Object.getOwnPropertyNames(oUser).length !=0 && oUser.active ==1 && oUser.user_detail[0].isLogin==0)
             return false;
         else
             return false;

@@ -39,7 +39,7 @@ module.exports = {
                     });
 
         // thay doi Login Status
-        await Users.updateUser(oResult.user_id,{
+        await UserDetail.updateDetail(oResult.user_id,{
             isLogin:1
         });
 
@@ -100,7 +100,7 @@ module.exports = {
         }
 
         try{
-            await Users.updateUser(req.users.userid,{ isLogin:0});
+            await UserDetail.updateDetail(req.users.userid,{ isLogin:0});
             return res.status(200).json({
                 status:"success"
             });

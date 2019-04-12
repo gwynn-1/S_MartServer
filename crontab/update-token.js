@@ -2,7 +2,7 @@ var admin = require("firebase-admin");
 
 var serviceAccount = require("../smartapp-45af7-firebase-adminsdk-lhg28-09cdb2e7fe.json");
 
-const UPDATE_QR_TOPIC ="UPDATE_QR_TOPIC";
+const UPDATE_QR_TOPIC = "UPDATE_QR_TOPIC";
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://smartapp-45af7.firebaseio.com"
@@ -33,7 +33,9 @@ module.exports = {
 
                 for (var i = 0; i < users.length; i++) {
                     var token = GeneralService.token_genarate(users[i].user_name);
-                    await Users.update({ user_id: users[i].user_id })
+                    // await Users.update({ user_id: users[i].user_id })
+                    //     .set({ shop_token: token });
+                    await UserDetail.update({ user_id: users[i].user_id })
                         .set({ shop_token: token });
                 }
                 console.log("success");
