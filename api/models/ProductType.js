@@ -8,7 +8,7 @@
 module.exports = {
   tableName: 'product_type',
   primaryKey: 'type_id',
-
+  dontUseObjectIds: true,
   attributes: {
     type_id:{ type:'number',unique:true,autoIncrement:true},
     product_type_name:{ type:'string',maxLength:256},

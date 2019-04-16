@@ -17,8 +17,8 @@ module.exports = {
       columnName: 'notification_date',
       type: 'number', columnType: 'datetime'
     },
-    isNotify:{type: 'number'},
-    isFinish:{type: 'number'},
+    isNotify: { type: 'number' },
+    isFinish: { type: 'number' },
     created_at: {
       columnName: 'created_at',
       type: 'number', columnType: 'datetime', autoCreatedAt: true
@@ -29,7 +29,15 @@ module.exports = {
     }
   },
 
-  
+  listNote: async function (userid,page=1) {
+    var limit =10;
+    var oResult = await Note.find({
+      where: { user_id: userid },
+      limit, skip: limit * (page - 1)
+    });
+
+    return oResult;
+  }
 
 };
 

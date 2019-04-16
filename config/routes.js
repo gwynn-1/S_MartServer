@@ -62,8 +62,10 @@ module.exports.routes = {
   'GET /api/location/get-province':'LocationController._getProvince',
 
   'GET /api/receipt/:id?':'ReceiptController._getReceipt',
+  'GET /api/note/:id?':'NoteController._getNote',
 
   'GET /api/cart/list':'CartController._listCart',
+  'POST /api/cart/update':'CartController._modifyCart',
   
   //use for embedded camera device
   'POST /api/qrcode/authen':'QrCodeController.authenQrCode'

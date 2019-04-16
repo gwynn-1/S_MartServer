@@ -36,6 +36,7 @@ module.exports.policies = {
     'getAllProduct':'JwtCheck'
   },
   CartController:{
-    '_listCart':'JwtCheck'
+    '_listCart':'JwtCheck',
+    '_modifyCart':'JwtCheck'
   }
 };
