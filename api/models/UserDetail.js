@@ -43,7 +43,6 @@ module.exports = {
   getShoppingToken: async function (userid) {
     var user = await UserDetail.find({
       where: { user_id: userid },
-      select: ['shop_token']
     }).limit(1);
     if (user[0])
       return user[0].shop_token;
