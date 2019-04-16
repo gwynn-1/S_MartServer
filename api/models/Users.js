@@ -80,7 +80,7 @@ module.exports = {
 
     checkIfLoginByUsername:async function(username){
         var oUser = await Users.findOne({
-            select: ['isLogin','active','user_name',"Avatar","Name","user_id"],
+            select: ['active','user_name',"Avatar","Name","user_id"],
             where:{'user_name': username}
           }).populate("user_detail");
         //   console.log(oUser,username);
@@ -126,38 +126,4 @@ module.exports = {
         var user = await Users.create(user).usingConnection(db).fetch();
         return user;
     },
-
-    getShoppingToken:async function(userid){
-        var user = await Users.find({
-            where: { user_id: userid },
-            select: ['shop_token']
-          }).limit(1);
-        if(user[0])
-            return user[0].shop_token;
-        else
-            return false;
-        
-    },
-
-    checkShoppingToken:async function(shoptoken){
-        var user = await Users.find({
-            where: { shop_token: shoptoken },
-            select: ['user_name',"Name","user_id"]
-          }).limit(1);
-        if(user[0])
-            return user[0];
-        else
-            return false;
-    },
-
-    changeShoppingStatus:async function(userid,status){
-        try{
-            await Users.update({user_id:userid})
-                        .set({isShopping:status});
-            return true;
-        }catch(err){
-            console.log(err);
-            return false;
-        }
-    }
 }

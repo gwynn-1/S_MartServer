@@ -12,7 +12,7 @@ module.exports = {
     error_code: sails.config.error_code,
     getQrCode: async function (req, res) {
         
-        var shop_token = await Users.getShoppingToken(req.users.userid);
+        var shop_token = await UserDetail.getShoppingToken(req.users.userid);
         console.log(shop_token);
         if (shop_token) {
 
@@ -44,11 +44,11 @@ module.exports = {
                 "status": "error",
                 "message": sails.config.error_code.WRONG_IMAGE_DATA
             });
-        var oResult = await Users.checkShoppingToken(params["qr_data"]);
+        var oResult = await UserDetail.checkShoppingToken(params["qr_data"]);
         console.log(oResult);
 
         if (oResult) {
-            if (await Users.changeShoppingStatus(oResult.user_id, 1)) {
+            if (await UserDetail.changeShoppingStatus(oResult.user_id, 1)) {
                 var jwt = JwtService.jwtSign({
                     userid: oResult.user_id,
                     username: oResult.user_name,
