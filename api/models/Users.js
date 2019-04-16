@@ -17,9 +17,9 @@ module.exports = {
         WardId:{ type:"number" },
         gender:{ type:"number" },
 
-        shop_token:{ type:'string',maxLength:100 },
-        isShopping:{ type:"number" },
-        isLogin:{ type:"number" },
+        // shop_token:{ type:'string',maxLength:100 },
+        // isShopping:{ type:"number" },
+        // isLogin:{ type:"number" },
         active:{ type:"number" },
         user_detail: {
             collection: 'UserDetail',
