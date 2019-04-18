@@ -9,9 +9,18 @@ var ObjectID = require("bson-objectid");
 module.exports = {
     _listCart: async function (req, res) {
         var cart = await Cart._getAllByUser(req.users.userid);
+        var total_price = 0;
+        var quantity = 0;
+        for(var index in cart){
+            total_price += cart[index].total_price;
+            quantity += cart[index].quantity;
+        }
+
         return res.status(200).json({
             "status": "success",
-            "data": cart
+            "data": cart,
+            "total_price":total_price,
+            "total_quantity":quantity
         });
     },
 
