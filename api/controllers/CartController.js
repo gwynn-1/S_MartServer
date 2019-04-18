@@ -11,16 +11,18 @@ module.exports = {
         var cart = await Cart._getAllByUser(req.users.userid);
         var total_price = 0;
         var quantity = 0;
-        for(var index in cart){
-            total_price += cart[index].total_price;
-            quantity += cart[index].quantity;
+        if (cart.length > 0) {
+            for (var index in cart) {
+                total_price += cart[index].total_price;
+                quantity += cart[index].quantity;
+            }
         }
 
         return res.status(200).json({
             "status": "success",
             "data": cart,
-            "total_price":total_price,
-            "total_quantity":quantity
+            "total_price": total_price,
+            "total_quantity": quantity
         });
     },
 
@@ -42,12 +44,12 @@ module.exports = {
                             quantity: cart.quantity - 1,
                             total_price: cart.total_price - cart.product_id.price
                         }, user_id, params.product_id);
-                    }else{
-                        var delCart = await Cart._deleteCart( user_id, params.product_id);
-                        if(!delCart){
+                    } else {
+                        var delCart = await Cart._deleteCart(user_id, params.product_id);
+                        if (!delCart) {
                             return res.status(401).json({
-                                'status':"error",
-                                'message':sails.config.error_code.CART_ITEM_NOT_EXIST
+                                'status': "error",
+                                'message': sails.config.error_code.CART_ITEM_NOT_EXIST
                             });
                         }
                     }
@@ -58,22 +60,22 @@ module.exports = {
                     await Cart._insertCart({
                         '_id': ObjectID().toString(),
                         user_id,
-                        product_id:params.product_id,
+                        product_id: params.product_id,
                         quantity: 1,
-                        total_price:product.price
+                        total_price: product.price
                     });
-                }else{
+                } else {
                     return res.status(401).json({
                         "status": "success",
-                        'message':sails.config.error_code.CART_ITEM_NOT_EXIST
+                        'message': sails.config.error_code.CART_ITEM_NOT_EXIST
                     });
                 }
             }
         } catch (e) {
             return res.status(401).json({
                 "status": "success",
-                'message':sails.config.error_code.CART_ERROR,
-                "raw":e
+                'message': sails.config.error_code.CART_ERROR,
+                "raw": e
             });
         }
 
