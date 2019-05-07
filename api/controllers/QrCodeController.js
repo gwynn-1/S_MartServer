@@ -49,10 +49,12 @@ module.exports = {
 
         if (oResult) {
             if (await UserDetail.changeShoppingStatus(oResult.user_id, 1)) {
+                var oUser = await Users.getUserInfo(oResult.user_id);
+
                 var jwt = JwtService.jwtSign({
                     userid: oResult.user_id,
-                    username: oResult.user_name,
-                    name: oResult.Name
+                    username: oUser.user_name,
+                    name: oUser.Name
                 });
 
                 return res.status(200).json({

@@ -50,5 +50,14 @@ module.exports = {
       return false;
 
   },
+  checkShoppingToken:async function(shoptoken){
+    var user = await UserDetail.find({
+        where: { shop_token: shoptoken }
+      }).limit(1);
+    if(user[0])
+        return user[0];
+    else
+        return false;
+},
 };
 

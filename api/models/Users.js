@@ -29,7 +29,7 @@ module.exports = {
 
     getUserInfo:async function(userid) {
         var oUser = await Users.findOne({
-            select: ["Name","Email","Phone","Avatar","Address","CityId","DistrictId","WardId","gender"],
+            select: ["Name","user_name","Email","Phone","Avatar","Address","CityId","DistrictId","WardId","gender"],
           }).where({'user_id': userid,"active":1});
         // console.log(oUser);
           if(oUser){
